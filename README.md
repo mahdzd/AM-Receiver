@@ -1,2 +1,2 @@
 # AM-Receiver
-amplitude modulated signal receiver. this circuit is intended to receive AM signal through input wire, demodulate, amplify, and provide enough output current for a speaker to drive.
+Amplitude-modulated signal receiver. This circuit is intended to receive an AM signal through the input wire, demodulate, amplify, and provide enough output current for a speaker to drive.
