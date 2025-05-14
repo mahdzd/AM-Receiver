@@ -1,0 +1,18 @@
+part 1 project
+
+
+V1 1 0 SIN(0 2 800k 0 0)
+V2 2 0 SIN(0 2 1k 0 0)
+E3 in 0 POLY(2) (1,0) (2,0) 0 0 0 0 1
+D  in 4 DX
+Rdem 4 0 1k
+Cdem 4 0 2n
+R 4 out 510
+C out 0 1n
+
+.MODEL DX D(IS=800.0E-18)
+.tran 0.0001
+
+.model 1N34A D (bv=75 cjo=0.5e-12 eg=0.67 ibv=18e-3 is=2e-7 rs=7 n=1.3 vj=0.1 m=0.27)
+
+.end

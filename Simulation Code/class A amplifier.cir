@@ -1,0 +1,90 @@
+; part 1 & 2
+
+*CONNECTIONS: NON-INVERTING INPUT (5)
+*             | INVERTING INPUT (6)
+*             | | POSITIVE POWER SUPPLY (7)
+*             | | | NEGATIVE POWER SUPPLY (8)
+*             | | | | OUTPUT (9)
+*             | | | | |
+.SUBCKT TL084 1 2 3 4 5
+  C1   11 12 3.498E-12
+  C2    6  7 15.00E-12
+  DC    5 53 DX
+  DE   54  5 DX
+  DLP  90 91 DX
+  DLN  92 90 DX
+  DP    4  3 DX
+  EGND 99  0 POLY(2) (3,0) (4,0) 0 .5 .5
+  FB    7 99 POLY(5) VB VC VE VLP VLN 0 4.715E6 -5E6 5E6 5E6 -5E6
+  GA    6  0 11 12 282.8E-6
+  GCM   0  6 10 99 8.942E-9
+  ISS   3 10 DC 195.0E-6
+  HLIM 90  0 VLIM 1K
+  J1   11  2 10 JX
+  J2   12  1 10 JX
+  R2    6  9 100.0E3
+  RD1   4 11 3.536E3
+  RD2   4 12 3.536E3
+  RO1   8  5 150
+  RO2   7 99 150
+  RP    3  4 2.143E3
+  RSS  10 99 1.026E6
+  VB    9  0 DC 0
+  VC    3 53 DC 2.200
+  VE   54  4 DC 2.200
+  VLIM  7  8 DC 0
+  VLP  91  0 DC 25
+  VLN   0 92 DC 25
+.MODEL DX D(IS=800.0E-18)
+.MODEL JX PJF(IS=15.00E-12 BETA=270.1E-6 VTO=-1)
+.ENDS
+
+
+
+V1 1 0 SIN(0 2 800k 0 0)
+V2 2 0 SIN(0 2 1k 0 0)
+E3 in 0 POLY(2) (1,0) (2,0) 0 0 0 0 1
+D  in 4 DX
+Rdem 4 0 1k
+Cdem 4 0 2n
+R 4 out 510
+C out 0 1n
+
+.MODEL DX D(IS=800.0E-18)
+
+
+.model 1N34A D (bv=75 cjo=0.5e-12 eg=0.67 ibv=18e-3 is=2e-7 rs=7 n=1.3 vj=0.1 m=0.27)
+
+;part 2
+;voltage divider
+Rv1 out v 10k
+Rv2 v 0 470
+
+C1 v 5 0.001m
+R1 5 0 150k
+V+ 7 0 5V
+V- 0 8 5V
+R2 9 6 150k
+Rpot 6 0 5k
+XU1 5 6 7 8 9 TL084
+
+*part 3
+
+C4 9 12 22u
+R10 12 7 200
+R11 12 8 1k
+Cl 8 0 22u
+Cp 7 0 22u
+Q5 13 13 8 BC337-40
+Q6 14 13 8 BC337-40
+Q7 7 12 14 BC337-40
+R12 13 7 127
+C5 14 15 22u
+Rl 15 0 8
+
+.model BC337-40 NPN(IS=7.809E-14 NF=0.9916 ISE=2.069E-15 NE=1.4 BF=436.8 IKF=0.8 VAF=103.6 NR=0.991 ISC=6.66E-14 NC=1.2 BR=44.14 IKR=0.09 VAR=14 RB=70 IRB=2.00E-04 RBM=8 RE=0.12 RC=0.24 XTB=0 EG=1.11 XTI=3 CJE=3.579E-11 VJE=0.6657 MJE=0.3596 TF=5E-10 XTF=2.5 VTF=2 ITF=0.5 PTF=88 CJC=1.306E-11 VJC=0.3647 MJC=0.3658 XCJC=0.455 TR=2.50E-08 CJS=0 VJS=0.75 MJS=0.333 FC=0.843 Vceo=45 Icrating=500m mfg=NXP)
+
+;.MODEL npn NPN ()
+
+.tran 0.0001
+.end
