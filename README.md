@@ -5,10 +5,10 @@
 **Date:** 11 May 2025  
 
 ## 👥 Team Members
-- Ali Awada – 202300797  
-- Malak Darwich – 202304438  
-- Dana Hachem – 202300964  
-- Mahdi Zein Al Dine – 202300041  
+- Ali Awada 
+- Malak Darwich 
+- Dana Hachem
+- Mahdi Zein Al Dine
 
 ---
 
